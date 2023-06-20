@@ -1,0 +1,16 @@
+h3
+{
+    box-shadow: 5in;
+}
+
+body
+{
+    background-size: cover;
+    text-align: center;
+}
+
+canvas 
+{
+    border: 2in;
+    border-color: darksalmon;
+}
