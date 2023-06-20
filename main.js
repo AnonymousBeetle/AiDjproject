@@ -2,9 +2,11 @@ Song1 = "";
 Song2 = "";
 
 leftwristX = 0;
-leftwristy = 0;
-rightwristx = 0;
-rightwristy = 0;
+leftwristY = 0;
+rightwristX = 0;
+rightwristY = 0;
+ScoreLeftWrist = 0;
+songstatus = "";
 
 function preload()
 {
@@ -52,4 +54,26 @@ function gotPoses(results)
 function draw()
 {
     image(video, 0, 0, 600, 500);
+
+    if(Song1.isPlaying() == true)
+    {
+        Song1.play();
+    }
+
+    fill("#FF0000");
+    stroke("#FF0000");
+
+    if(ScoreLeftWrist > 0.2)
+    {
+        circle(leftwristX, leftWristY, 20);
+
+        Song2.stop();
+
+        if(Song1.isPlaying == false)
+        {
+            Song1.play();
+
+            document.getElementById("song-name").innerHTML = "Servant of Evil Instrumental"
+        }
+    }
 }
