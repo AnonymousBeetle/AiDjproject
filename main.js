@@ -6,29 +6,31 @@ leftwristY = 0;
 rightwristX = 0;
 rightwristY = 0;
 ScoreLeftWrist = 0;
+ScoreRightWrist = 0;
 songstatus = "";
 
 function preload()
 {
-    Song1 = loadSound("Song1.mp3")
-    Song2 = loadSound("Song2.mp3")
+    Song1 = loadSound("Song1.mp3");
+    Song2 = loadSound("Song2.mp3");
 }
 
 function setup()
 {
     canvas = createCanvas(600, 500);
-    canvas.center()
+    canvas.center();
     
     video = createCapture(VIDEO);
     video.hide();
 
-    poseNet = ml5.poseNet(video, modelLoaded)
-    poseNet.on('pose', gotPoses)
+    poseNet = ml5.poseNet(video, modelLoaded);
+    poseNet.on('pose', gotPoses);
 }
+
 
 function modelLoaded()
 {
-    console.log('PoseNet is initialized')
+    console.log('PoseNet is initialized');
 }
 
 function gotPoses(results)
@@ -60,6 +62,11 @@ function draw()
         Song1.play();
     }
 
+    if(Song2.isPlaying() == true)
+    {
+        Song2.play();
+    }
+
     fill("#FF0000");
     stroke("#FF0000");
 
@@ -73,7 +80,21 @@ function draw()
         {
             Song1.play();
 
-            document.getElementById("song-name").innerHTML = "Servant of Evil Instrumental"
+            document.getElementById("song-name").innerHTML = "Servant of Evil Instrumental";
+        }
+    }
+
+    if(ScoreRightWrist > 0.2)
+    {
+        circle(rightWristX, rightWristY, 20);
+        
+        Song1.stop();
+
+        if(Song2.isPlaying == false)
+        {
+            Song2.play();
+
+            document.getElementById("song-name").innerHTML = "Vampire off-vocals";
         }
     }
 }
